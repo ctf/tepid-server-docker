@@ -1,13 +1,13 @@
 FROM gradle:alpine
 
 COPY code/tepid-server/ .
+COPY config/* /etc/tepid/
 
-RUN	pwd
-RUN  	gradle test
+RUN	ls /etc/tepid
+RUN  	gradle test --continue; exit 0
 RUN	gradle war
 
-FROM tomcat:8-jre-alpine
+FROM tomcat:8-jre8-alpine
 
-WORKDIR /var/lib/tomcat8/webapps/
-COPY --from=0 /lib/tepid.war .
+COPY --from=0 /tepid-server/build/libs/tepid.war .
 CMD ["catalina.sh", "run"]
