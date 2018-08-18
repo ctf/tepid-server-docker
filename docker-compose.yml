@@ -7,3 +7,6 @@ services:
       - ./tomcat/config:/etc/tepid
     ports:
       - 80
+
+  couchdb:
+    build: ./couchdb
