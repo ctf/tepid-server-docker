@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  tepid-server:
+    build: ./tomcat
+    ports:
+      - 80
