@@ -1,0 +1,11 @@
+### BEGIN AUTOGEN ###
+bin
+docker/docker
+a.out
+*.orig
+build_src
+*.test
+bundles/
+### END AUTOGEN ###
+
+code/
