@@ -3,5 +3,7 @@ version: '3'
 services:
   tepid-server:
     build: ./tomcat
+    volumes:
+      - ./tomcat/config:/etc/tepid
     ports:
       - 80
