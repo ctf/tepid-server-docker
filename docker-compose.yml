@@ -10,3 +10,7 @@ services:
 
   couchdb:
     build: ./couchdb
+    volumes:
+      - ./couchdb/config:/opt/couchdb/etc/local.d
+    ports:
+      - 5984:5984
