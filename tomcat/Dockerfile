@@ -15,5 +15,7 @@ FROM tomcat:8-jre8-alpine
 
 RUN /bin/sh -c 'apk add --no-cache ghostscript'
 
-COPY --from=0 /home/gradle/tepid-server/build/libs/tepid.war /usr/local/tomcat/webapps/
-CMD ["catalina.sh", "run"]
+RUN 	rm -R /usr/local/tomcat/webapps/*
+COPY 	--from=0 /home/gradle/tepid-server/build/libs/tepid.war /usr/local/tomcat/webapps/
+
+CMD 	["catalina.sh", "run"]
