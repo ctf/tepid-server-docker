@@ -15,3 +15,8 @@ services:
       - ./tomcat/config:/etc/tepid
     ports:
       - 8080
+
+  tepid-web:
+    build: ./web
+    ports:
+      - 443
