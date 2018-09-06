@@ -21,3 +21,10 @@ services:
     build: ./web
     ports:
       - 443
+
+  gitlab-runner:
+    build: ./CI
+    volumes:
+      - ./CI/config:/etc/gitlab-runner/config
+    environment:
+      - GRADLE_VERSION=4.10
