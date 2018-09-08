@@ -16,9 +16,9 @@ RUN  	gradle test --continue; exit 0
 RUN	gradle war
 
 ###### Tomcat ######
-FROM tomcat:8-jre8-alpine
+FROM 	tomcat:8-jre8-alpine
 
-RUN /bin/sh -c 'apk add --no-cache samba-client ghostscript'
+RUN 	/bin/sh -c 'apk add --no-cache samba-client ghostscript'
 
 RUN 	rm -R /usr/local/tomcat/webapps/*
 COPY 	--from=0 /home/gradle/tepid-server/build/libs/tepid.war /usr/local/tomcat/webapps/

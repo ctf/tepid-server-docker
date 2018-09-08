@@ -13,6 +13,7 @@ services:
     build: ./tomcat
     volumes:
       - ./tomcat/config:/etc/tepid
+      - war:/usr/local/tomcat/webapps
     ports:
       - 8080
       - 8443
@@ -26,7 +27,10 @@ services:
     container_name: CI
     build: ./CI
     volumes:
-      - ./CI/config:/etc/gitlab-runner/config
+      - war:/var/lib/tomcat8/webapps/
     environment:
       - GRADLE_VERSION=4.10
     tty: true
+
+volumes:
+  war:
