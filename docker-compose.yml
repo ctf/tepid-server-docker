@@ -23,8 +23,10 @@ services:
       - 443
 
   gitlab-runner:
+    container_name: CI
     build: ./CI
     volumes:
       - ./CI/config:/etc/gitlab-runner/config
     environment:
       - GRADLE_VERSION=4.10
+    tty: true
