@@ -1,24 +1,19 @@
-FROM    gitlab/gitlab-runner:alpine
+###### Gradle ######
+FROM gradle:jdk-slim
 
-USER    root
-RUN     /bin/sh -c 'apk add --no-cache ghostscript'
+USER	root
+RUN	apt-get update \
+	&& apt-get -y  install ghostscript git smbclient
+#USER	gradle
 
-# Install Gradle
-ENV	GRADLE_VERSION=4.10
-RUN wget  https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip && \
-    unzip gradle-$GRADLE_VERSION-bin.zip && \
-    rm -f gradle-$GRADLE_VERSION-bin.zip && \
-    ln -s gradle-$GRADLE_VERSION gradle && \
-    echo -ne "- with Gradle $GRADLE_VERSION\n" >> /root/.built
+###### Gitlab Runner ######
 
-USER	gradle
+RUN	wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 \
+	&& chmod +x /usr/local/bin/gitlab-runner \
+	&& adduser -S -h /home/gitlab-runner -s /bin/bash gitlab-runner \
+	&& gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner \
 
-# Copy Code
-COPY	--chown=gradle:gradle code/tepid-server /home/gradle
-COPY	config/* /etc/tepid/
+COPY	./config/config.toml /etc/gitlab-runner/aconfig.toml
 
-# Build
-WORKDIR	/home/gradle/tepid-server
-RUN     gradle test --continue; exit 0
-RUN     gradle war
-
+#ENTRYPOINT	["gitlab-runner", "start"]
+ENTRYPOINT	["/bin/bash"]
