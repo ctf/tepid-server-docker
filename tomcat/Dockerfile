@@ -13,7 +13,8 @@ COPY config/* /etc/tepid/
 # Test and Build
 WORKDIR /home/gradle/tepid-server
 RUN  	gradle test --continue; exit 0
-RUN	gradle war
+RUN	gradle integrationTest; exit 0
+RUN	gradle war;
 
 ###### Tomcat ######
 FROM 	tomcat:8-jre8-alpine
