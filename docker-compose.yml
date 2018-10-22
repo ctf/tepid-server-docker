@@ -6,10 +6,14 @@ services:
     build: ./couchdb
     volumes:
       - ./couchdb/config:/opt/couchdb/etc/local.d
+#      - ./couchdb/data:/opt/couchdb/data
     ports:
       - 5984
+    restart: unless-stopped
 
   tepid-server:
+    depends_on:
+      - couchdb
     build: ./tomcat
     volumes:
       - ./tomcat/config:/etc/tepid
@@ -17,20 +21,25 @@ services:
     ports:
       - 8080
       - 8443
+    restart: unless-stopped
 
   tepid-web:
     build: ./web
     ports:
       - 443
+    restart: unless-stopped
 
   gitlab-runner:
     container_name: CI
     build: ./CI
     volumes:
-      - war:/var/lib/tomcat8/webapps/
+      - war:/var/lib/tomcat8/webapps
+      - ./tomcat/config:/etc/tepid
     environment:
       - GRADLE_VERSION=4.10
     tty: true
+    restart: unless-stopped
+
 
 volumes:
   war:
