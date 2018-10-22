@@ -16,4 +16,4 @@ RUN	wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amaz
 COPY	config/config.toml /etc/gitlab-runner/config.toml
 
 #ENTRYPOINT	["gitlab-runner", "start"]
-ENTRYPOINT	["/bin/bash"]
+ENTRYPOINT	["gitlab-runner", "run"]
