@@ -23,6 +23,15 @@ services:
       - 8443
     restart: unless-stopped
 
+  build:
+    depends_on:
+      - couchdb
+    build: ./gradle
+    volumes:
+      - ./tomcat/config:/etc/tepid
+      - war:/var/lib/tomcat8/webapps
+    restart: "no"
+
   tepid-web:
     build: ./web
     ports:
