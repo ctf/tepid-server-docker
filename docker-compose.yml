@@ -38,7 +38,7 @@ services:
       - 443
     restart: unless-stopped
 
-  CI:
+  ci:
     build: ./gitlab-runner
     volumes:
       - war:/var/lib/tomcat8/webapps
