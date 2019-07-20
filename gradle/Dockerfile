@@ -1,8 +1,9 @@
 ###### Gradle ######
-FROM gradle:alpine
+FROM gradle:jdk11
 
 USER    root
-RUN     /bin/sh -c 'apk add --no-cache samba-client ghostscript'
+RUN	apt-get update 
+RUN	apt-get install -y samba ghostscript 
 
 USER    gradle
 
