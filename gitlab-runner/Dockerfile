@@ -1,9 +1,9 @@
 ###### Gradle ######
-FROM gradle:jdk-slim
+FROM gradle:jdk11
 
 USER	root
-RUN	apt-get update \
-	&& apt-get -y  install ghostscript git smbclient
+RUN	apt-get update 
+RUN	apt-get -y  install ghostscript git smbclient
 #USER	gradle
 
 ###### Gitlab Runner ######
