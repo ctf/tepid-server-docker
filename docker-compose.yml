@@ -30,10 +30,11 @@ services:
     restart: "no"
 
   tepid-web:
-    build: ./web
+    image: containers.gitlab.ctf.science.mcgill.ca/tepid/tepid-web:master
     ports:
-      - 443
+      - "80"
     restart: unless-stopped
+    env_file: tepid-web.env
 
   ci:
     build: ./gitlab-runner
