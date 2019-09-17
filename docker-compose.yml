@@ -1,22 +1,12 @@
 version: '3.5'
 
 services:
-
-#  db:
-#    build: ./couchdb
-#    volumes:
-#      - ./couchdb/config:/opt/couchdb/etc/local.d
-##      - ./couchdb/data:/opt/couchdb/data
-#    ports:
-#      - 5984
-#    restart: unless-stopped
-
   db:
     build: ./postgresql
     restart: unless-stopped
-#    environment:
-#      POSTGRES_PASSWORD: example
     env_file: db.env
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
 
   tepid-server:
     depends_on:
