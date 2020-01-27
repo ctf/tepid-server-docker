@@ -11,7 +11,7 @@ services:
   tepid-server:
     depends_on:
       - db
-    build: ./tomcat
+    image: containers.gitlab.ctf.science.mcgill.ca/tepid/tepid-server:dev
     volumes:
       - ./tomcat/config:/etc/tepid
       - war:/usr/local/tomcat/webapps
@@ -30,7 +30,7 @@ services:
     restart: "no"
 
   tepid-web:
-    image: containers.gitlab.ctf.science.mcgill.ca/tepid/tepid-web:master
+    image: containers.gitlab.ctf.science.mcgill.ca/tepid/tepid-web/test:dev
     ports:
       - "80"
     restart: unless-stopped
