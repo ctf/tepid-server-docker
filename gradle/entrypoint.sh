@@ -2,6 +2,7 @@
 echo "beginning build"
 cd /home/gradle/tepid-server
 gradle --status
+gradle clean
 gradle test -i --continue || true
 gradle war;
 echo "build completed"
